@@ -1,0 +1,39 @@
+FROM php:8.4-apache
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libxml2-dev \
+    libonig-dev \
+    unzip \
+    git \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd zip pdo pdo_mysql xml
+
+COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
+
+RUN a2enmod rewrite headers
+RUN a2enmod ssl
+
+RUN echo "upload_max_filesize=3G" > /usr/local/etc/php/conf.d/uploads.ini \
+ && echo "post_max_size=3G" >> /usr/local/etc/php/conf.d/uploads.ini \
+ && echo "max_execution_time=300" >> /usr/local/etc/php/conf.d/uploads.ini \
+ && echo "memory_limit=512M" >> /usr/local/etc/php/conf.d/uploads.ini
+
+# Configuration des logs PHP
+RUN echo "log_errors=On" >> /usr/local/etc/php/conf.d/uploads.ini \
+ && echo "error_log=/var/log/php/error.log" >> /usr/local/etc/php/conf.d/uploads.ini \
+ && mkdir -p /var/log/php \
+ && chmod 755 /var/log/php
+
+#  On copie les fichiers de l'application dans le conteneur
+COPY . /var/www/html
+
+# On lance composer
+WORKDIR /var/www/html
+RUN composer install --no-dev --optimize-autoloader
+RUN php artisan migrate
