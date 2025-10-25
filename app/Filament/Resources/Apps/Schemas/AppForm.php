@@ -27,10 +27,6 @@ class AppForm
                     ->label('Code identifiant l\'application')
                     ->required()
                     ->maxLength(255),
-
-                FileUpload::make('appicon')
-                    ->label('Icône de l’application')
-                    ->avatar(),
             ]);
     }
 }

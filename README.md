@@ -1,61 +1,711 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📱 Laravel Mobile App OTA Manager
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
+  <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/Filament-3.x-F59E0B?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMiA3TDEyIDEyTDIyIDdMMTIgMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yIDEyTDEyIDE3TDIyIDEyIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+" alt="Filament">
+  <img src="https://img.shields.io/badge/Capacitor-Compatible-53B9FF?style=for-the-badge&logo=capacitor&logoColor=white" alt="Capacitor">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
 </p>
 
-## About Laravel
+<p align="center">
+  <strong>Over-The-Air (OTA) Update Manager for Capacitor Mobile Applications</strong>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  A complete and secure solution to manage and distribute updates for your mobile applications without going through app stores.
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📖 Table of Contents
 
-## Learning Laravel
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Usage](#-usage)
+- [API Documentation](#-api-documentation)
+- [Capacitor Integration](#-capacitor-integration)
+- [Security](#-security)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ✨ Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🎯 Application Management
+- ✅ Modern admin interface with **Filament 3**
+- ✅ Multi-application management with unique identifiers
+- ✅ Support for application icons and images
 
-## Laravel Sponsors
+### 🚀 Version Management
+- ✅ Upload bundles (.zip files)
+- ✅ Semantic versioning support
+- ✅ Detailed changelog for each version
+- ✅ Enable/disable versions
+- ✅ Direct bundle downloads
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 🔒 Security & Authentication
+- ✅ **API Token Authentication**
+- ✅ Automatic secure token generation (SHA-256)
+- ✅ Token revocation and regeneration
+- ✅ Token usage tracking
+- ✅ Complete API route protection
 
-### Premium Partners
+### 📡 RESTful API
+- ✅ Endpoints to check for updates
+- ✅ Bundle downloads
+- ✅ Compatible with **Capacitor Updater** (@capgo/capacitor-updater)
+- ✅ Integrated interactive documentation
+- ✅ Standardized JSON responses
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 🛠️ Development Tools
+- ✅ Artisan commands for token management
+- ✅ Docker support (development and production)
+- ✅ Complete API documentation
+- ✅ Capacitor integration examples
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 📸 Screenshots
 
-## Code of Conduct
+### App Manager OTA
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+#### Applications List
+![Applications List](/public/img/AppList.png)
+*Centralized management of all your mobile applications*
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Applications Creation](/public/img/AppCreate.png)
+*Create your app to manage OTA Update of app*
 
-## License
+#### Version Management
+![Version Management](/public/img/VersionCreate.png)
+*Creation version for OTA Update with build zip file of capacitor app*
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![Version Management](/public/img/VersionList.png)
+*List all version of OTA Update*
+
+#### Integrated API Documentation
+![API Documentation](/public/img/APIDocs.png)
+*Interactive documentation with code examples and API token*
+
+---
+
+## 📋 Prerequisites
+
+Before starting, make sure you have:
+
+- **PHP** >= 8.2
+- **Composer** >= 2.0
+- **Node.js** >= 18.x and **NPM** >= 9.x
+- **MySQL** >= 8.0 or **MariaDB** >= 10.3
+- **Git**
+
+### Optional (recommended)
+- **Docker** and **Docker Compose** (for isolated development environment)
+
+---
+
+## 🚀 Installation
+
+### Option 1: Local Installation
+
+#### 1. Clone the project
+
+```bash
+git clone https://github.com/your-username/Laravel-Mobile-App-OTA-Manager.git
+cd Laravel-Mobile-App-OTA-Manager
+```
+
+#### 2. Install dependencies
+
+```bash
+# PHP dependencies
+composer install
+
+# JavaScript dependencies
+npm install
+```
+
+#### 3. Environment configuration
+
+```bash
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+```
+
+#### 4. Configure the database
+
+Edit the `.env` file and configure your database:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=appmanagerotacapacitor
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
+
+#### 5. Run migrations
+
+```bash
+# Create tables
+php artisan migrate
+
+# Generate symbolic link for storage
+php artisan storage:link
+```
+
+#### 6. Generate initial API token
+
+```bash
+php artisan db:seed --class=ApiTokenSeeder
+```
+
+> ⚠️ **Important**: Save the displayed token, it will not be shown again!
+
+#### 7. Create an admin user
+
+```bash
+php artisan make:filament-user
+```
+
+#### 8. Compile assets
+
+```bash
+npm run build
+```
+
+#### 9. Start the server
+
+```bash
+php artisan serve
+```
+
+The application will be accessible at `http://localhost:8000`
+
+---
+
+### Option 2: Docker Installation
+
+#### 1. Clone the project
+
+```bash
+git clone https://github.com/your-username/Laravel-Mobile-App-OTA-Manager.git
+cd Laravel-Mobile-App-OTA-Manager
+```
+
+#### 2. Start containers
+
+```bash
+# Development
+docker-compose up -d
+
+# Production
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+#### 3. Install dependencies in the container
+
+```bash
+docker-compose exec app composer install
+docker-compose exec app npm install
+docker-compose exec app npm run build
+```
+
+#### 4. Configuration
+
+```bash
+docker-compose exec app cp .env.example .env
+docker-compose exec app php artisan key:generate
+```
+
+#### 5. Migrations and token
+
+```bash
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan storage:link
+docker-compose exec app php artisan db:seed --class=ApiTokenSeeder
+```
+
+#### 6. Create an admin user
+
+```bash
+docker-compose exec app php artisan make:filament-user
+```
+
+The application will be accessible at `http://localhost:8000`
+
+---
+
+## ⚙️ Configuration
+
+### Important environment variables
+
+```env
+# Application
+APP_NAME="Laravel OTA Manager"
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://your-domain.com
+
+# Database
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=appmanagerotacapacitor
+DB_USERNAME=root
+DB_PASSWORD=your_secure_password
+
+# Session & Cache
+SESSION_DRIVER=database
+CACHE_STORE=database
+```
+
+### API Token Management
+
+API tokens are stored in the database and can be managed via Artisan commands:
+
+```bash
+# Show active token
+php artisan api-token:manage show
+
+# Generate a new token
+php artisan api-token:manage generate --name="Production Token"
+
+# List all tokens
+php artisan api-token:manage list
+
+# Revoke active token
+php artisan api-token:manage revoke
+
+# Activate a revoked token
+php artisan api-token:manage activate
+```
+
+---
+
+## 💻 Usage
+
+### Access the admin interface
+
+1. Go to `http://your-domain.com/admin`
+2. Log in with your admin credentials
+
+### Create a new application
+
+1. In the menu, click on **"Applications"**
+2. Click on **"New Application"**
+3. Fill in the information:
+   - Application name
+   - Identifier (e.g., `com.example.app`)
+   - Description
+   - Icon (optional)
+4. Click on **"Create"**
+
+### Upload a new version
+
+1. In the menu, click on **"Versions"**
+2. Click on **"New Version"**
+3. Select the application
+4. Fill in the information:
+   - Version code (e.g., `1.2.0`)
+   - Changelog (list of changes)
+   - Bundle (.zip)
+5. Click on **"Create"**
+
+### View API documentation
+
+1. In the menu, click on **"OTA API Documentation"**
+2. You'll find:
+   - API base URL
+   - Your active API token
+   - Request examples for each endpoint
+   - Capacitor integration guide
+
+---
+
+## 📚 API Documentation
+
+### Authentication
+
+All API routes require an authentication token provided via the `api_token` parameter:
+
+```bash
+curl "http://your-domain.com/api/ota/lastversion?identifier=com.example.app&api_token=YOUR_TOKEN"
+```
+
+### Available Endpoints
+
+#### 1. Get the latest version
+
+```http
+GET /api/ota/lastversion
+```
+
+**Parameters:**
+- `identifier` (required) - Application identifier
+- `current_version` (optional) - Current version
+- `api_token` (required) - Authentication token
+
+**Example response:**
+```json
+{
+  "version": "1.2.0",
+  "url": "https://your-domain.com/storage/bundles/com.example.app_1.2.0.zip",
+  "changelog": [
+    "Bug fixes",
+    "Performance improvements"
+  ],
+  "created_at": "2025-10-25T14:30:00.000000Z"
+}
+```
+
+#### 2. Check for update availability
+
+```http
+GET /api/ota/check-update
+```
+
+**Parameters:**
+- `identifier` (required) - Application identifier
+- `current_version` (required) - Currently installed version
+- `api_token` (required) - Authentication token
+
+**Example response:**
+```json
+{
+  "update_available": true,
+  "latest_version": "1.2.0",
+  "current_version": "1.0.0",
+  "url": "https://your-domain.com/storage/bundles/com.example.app_1.2.0.zip",
+  "changelog": [
+    "Bug fixes",
+    "Performance improvements"
+  ]
+}
+```
+
+#### 3. Download a specific version
+
+```http
+GET /api/ota/download/{identifier}/{version}
+```
+
+**Parameters:**
+- `identifier` (path) - Application identifier
+- `version` (path) - Version code
+- `api_token` (required) - Authentication token
+
+**Response:** ZIP file download
+
+---
+
+## 📱 Capacitor Integration
+
+### Plugin installation
+
+```bash
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+### Basic configuration
+
+```typescript
+// src/services/updateService.ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const API_URL = 'https://your-domain.com/api/ota'
+const API_TOKEN = 'YOUR_API_TOKEN'
+const APP_IDENTIFIER = 'com.example.app'
+
+export async function checkForUpdates() {
+  try {
+    const current = await CapacitorUpdater.current()
+
+    const response = await fetch(
+      `${API_URL}/check-update?identifier=${APP_IDENTIFIER}&current_version=${current.version}&api_token=${API_TOKEN}`
+    )
+
+    const data = await response.json()
+
+    if (data.update_available) {
+      console.log('Update available:', data.latest_version)
+
+      // Download and install the update
+      const version = await CapacitorUpdater.download({
+        url: data.url,
+        version: data.latest_version
+      })
+
+      await CapacitorUpdater.set(version)
+      await CapacitorUpdater.reload()
+    }
+  } catch (error) {
+    console.error('Error checking for updates:', error)
+  }
+}
+```
+
+### Usage in your application
+
+```typescript
+// App.tsx or main.ts
+import { useEffect } from 'react'
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { checkForUpdates } from './services/updateService'
+
+function App() {
+  useEffect(() => {
+    // Notify that the app is ready
+    CapacitorUpdater.notifyAppReady()
+
+    // Check for updates on startup
+    checkForUpdates()
+
+    // Check periodically (every hour)
+    const interval = setInterval(checkForUpdates, 3600000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="App">
+      {/* Your application */}
+    </div>
+  )
+}
+
+export default App
+```
+---
+
+## 🔒 Security
+
+### Best Practices
+
+1. **API Token Protection**
+   - Never commit the token to Git
+   - Use environment variables
+   - Store the token securely in your mobile application
+
+2. **HTTPS required in production**
+   - The token is transmitted in clear text in the URL
+   - HTTPS is essential to secure communications
+
+3. **Regular token rotation**
+   ```bash
+   # Generate a new token every 3-6 months
+   php artisan api-token:manage generate
+   ```
+
+4. **Monitoring**
+   ```bash
+   # Check token usage
+   php artisan api-token:manage show
+   ```
+
+5. **Revocation in case of compromise**
+   ```bash
+   php artisan api-token:manage revoke
+   php artisan api-token:manage generate
+   ```
+
+### File Security
+
+The `.gitignore` file is configured to exclude:
+- `.env` files
+- `node_modules` and `vendor` folders
+- Docker database data
+- Storage files
+
+---
+
+## 🏗️ Architecture
+
+```
+Laravel-Mobile-App-OTA-Manager/
+├── app/
+│   ├── Console/Commands/
+│   │   └── ManageApiToken.php          # Token management commands
+│   ├── Filament/
+│   │   ├── Pages/
+│   │   │   └── OtaDocumentation.php    # Documentation page
+│   │   └── Resources/
+│   │       ├── Apps/                    # Application management
+│   │       └── Versions/                # Version management
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   └── OtaController.php        # OTA API
+│   │   └── Middleware/
+│   │       └── ValidateApiToken.php     # Authentication middleware
+│   └── Models/
+│       ├── ApiToken.php                 # Token model
+│       ├── App.php                      # Application model
+│       └── Version.php                  # Version model
+├── database/
+│   ├── migrations/                      # Database migrations
+│   └── seeders/
+│       └── ApiTokenSeeder.php           # Initial token generation
+├── routes/
+│   └── api.php                          # API routes
+├── storage/
+│   └── app/public/bundles/              # Bundle storage
+├── docker-compose.yaml                  # Docker configuration
+└── README.md                            # This file
+```
+
+---
+
+## 🧪 Testing
+
+```bash
+# Unit tests
+php artisan test
+
+# Tests with coverage
+php artisan test --coverage
+
+# Specific tests
+php artisan test --filter=ApiTokenTest
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Error 401 - Unauthorized
+
+**Cause:** Missing or invalid token
+
+**Solution:**
+```bash
+# Check active token
+php artisan api-token:manage show
+
+# Generate a new token if needed
+php artisan api-token:manage generate
+```
+
+### Error 404 - Application not found
+
+**Cause:** Application identifier doesn't exist
+
+**Solution:**
+1. Check the identifier in the Filament interface
+2. Create the application via `/admin`
+
+### Updates not downloading
+
+**Cause:** Missing symbolic link
+
+**Solution:**
+```bash
+php artisan storage:link
+```
+
+### Application not updating
+
+**Cause:** `notifyAppReady()` not called
+
+**Solution:**
+```typescript
+// In your App.tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+useEffect(() => {
+  CapacitorUpdater.notifyAppReady()
+}, [])
+```
+
+---
+
+## 📖 Complete Documentation
+
+- [Installation Guide](INSTALLATION_GUIDE.md)
+- [API Documentation](API_DOCUMENTATION.md)
+- [Capacitor Integration](CAPACITOR_INTEGRATION_EXAMPLE.md)
+- [Laravel Documentation](https://laravel.com/docs)
+- [Filament Documentation](https://filamentphp.com/docs)
+- [Capacitor Updater Documentation](https://github.com/Cap-go/capacitor-updater)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how to contribute:
+
+1. Fork the project
+2. Create a branch for your feature (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Guidelines
+
+- Follow Laravel coding conventions and PSR-12
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting
+
+---
+
+## 📝 Changelog
+
+### Version 1.0.0 (2025-10-25)
+
+#### Added
+- Filament admin interface
+- Application and version management
+- RESTful API for OTA
+- API token authentication
+- Integrated interactive documentation
+- Docker support
+- Artisan commands for token management
+- Capacitor integration guide
+
+---
+
+## 👥 Authors
+
+- **Your Name** - *Lead Developer* - [@your-username](https://github.com/your-username)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- [Laravel](https://laravel.com) - PHP Framework
+- [Filament](https://filamentphp.com) - Admin Interface
+- [Capacitor](https://capacitorjs.com) - Mobile Framework
+- [Capacitor Updater](https://github.com/Cap-go/capacitor-updater) - Update Plugin
+
+---
+
+## 📞 Support
+
+For any questions or issues:
+
+- 📧 Email: support@example.com
+- 🐛 Issues: [GitHub Issues](https://github.com/your-username/Laravel-Mobile-App-OTA-Manager/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/your-username/Laravel-Mobile-App-OTA-Manager/discussions)
+
+---
+
+<p align="center">
+  Made with ❤️ by your team
+</p>

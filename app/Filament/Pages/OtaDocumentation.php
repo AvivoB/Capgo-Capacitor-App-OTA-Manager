@@ -25,8 +25,15 @@ class OtaDocumentation extends Page
   {
     return [
       'baseUrl' => url('/api/ota'),
+      'apiToken' => $this->getActiveToken(),
       'examples' => $this->getExamples(),
     ];
+  }
+
+  protected function getActiveToken(): ?string
+  {
+    $token = \App\Models\ApiToken::getActiveToken();
+    return $token ? $token->token : null;
   }
 
   protected function getExamples(): array
@@ -40,22 +47,26 @@ class OtaDocumentation extends Page
         'parameters' => [
           'identifier' => 'L\'identifiant unique de l\'application (requis)',
           'current_version' => 'La version actuelle de l\'application (optionnel)',
+          'api_token' => 'Votre token d\'authentification API (requis)',
         ],
         'request' => [
-          'curl' => 'curl -X GET "' . url('/api/ota/lastversion?identifier=com.example.app&current_version=1.0.0') . '"',
+          'curl' => 'curl -X GET "' . url('/api/ota/lastversion?identifier=com.example.app&current_version=1.0.0&api_token={{token}}') . '"',
           'javascript' => <<<JS
-fetch('{{url}}/api/ota/lastversion?identifier=com.example.app&current_version=1.0.0')
+const API_TOKEN = 'VOTRE_TOKEN_ICI';
+
+fetch('{{url}}/api/ota/lastversion?identifier=com.example.app&current_version=1.0.0&api_token=' + API_TOKEN)
   .then(response => response.json())
   .then(data => console.log(data));
 JS,
           'Javascript' => <<<JS
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-// Configuration de l'URL de votre serveur
+// Configuration
+const API_TOKEN = 'VOTRE_TOKEN_ICI';
 const serverUrl = '{{url}}/api/ota'
 
 async function checkForUpdate() {
-  const response = await fetch(`\${serverUrl}/lastversion?identifier=com.example.app&current_version=1.0.0`)
+  const response = await fetch(`\${serverUrl}/lastversion?identifier=com.example.app&current_version=1.0.0&api_token=\${API_TOKEN}`)
   const data = await response.json()
 
   if (data.version && data.url) {
@@ -90,11 +101,14 @@ JS,
         'parameters' => [
           'identifier' => 'L\'identifiant unique de l\'application (requis)',
           'current_version' => 'La version actuelle de l\'application (requis)',
+          'api_token' => 'Votre token d\'authentification API (requis)',
         ],
         'request' => [
-          'curl' => 'curl -X GET "' . url('/api/ota/check-update?identifier=com.example.app&current_version=1.0.0') . '"',
+          'curl' => 'curl -X GET "' . url('/api/ota/check-update?identifier=com.example.app&current_version=1.0.0&api_token={{token}}') . '"',
           'javascript' => <<<JS
-fetch('{{url}}/api/ota/check-update?identifier=com.example.app&current_version=1.0.0')
+const API_TOKEN = 'VOTRE_TOKEN_ICI';
+
+fetch('{{url}}/api/ota/check-update?identifier=com.example.app&current_version=1.0.0&api_token=' + API_TOKEN)
   .then(response => response.json())
   .then(data => {
     if (data.update_available) {
@@ -122,15 +136,18 @@ JS,
         'parameters' => [
           'identifier' => 'L\'identifiant unique de l\'application',
           'version' => 'Le code de version à télécharger',
+          'api_token' => 'Votre token d\'authentification API (requis)',
         ],
         'request' => [
-          'curl' => 'curl -X GET "' . url('/api/ota/download/com.example.app/1.2.0') . '" -o update.zip',
+          'curl' => 'curl -X GET "' . url('/api/ota/download/com.example.app/1.2.0?api_token={{token}}') . '" -o update.zip',
           'javascript' => <<<JS
+const API_TOKEN = 'VOTRE_TOKEN_ICI';
+
 // Télécharger directement
-window.location.href = '{{url}}/api/ota/download/com.example.app/1.2.0';
+window.location.href = '{{url}}/api/ota/download/com.example.app/1.2.0?api_token=' + API_TOKEN;
 
 // Ou avec fetch pour obtenir le fichier
-fetch('{{url}}/api/ota/download/com.example.app/1.2.0')
+fetch('{{url}}/api/ota/download/com.example.app/1.2.0?api_token=' + API_TOKEN)
   .then(response => response.blob())
   .then(blob => {
     const url = window.URL.createObjectURL(blob);

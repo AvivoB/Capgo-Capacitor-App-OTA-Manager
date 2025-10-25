@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Routes publiques pour les mises à jour OTA (utilisées par Capgo)
-Route::prefix('ota')->group(function () {
+// Routes pour les mises à jour OTA (protégées par token API)
+Route::prefix('ota')->middleware('api.token')->group(function () {
     // Récupère la dernière version disponible
     Route::get('/lastversion', [OtaController::class, 'lastversion'])->name('ota.lastversion');
 

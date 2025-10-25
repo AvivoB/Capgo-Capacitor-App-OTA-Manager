@@ -75,18 +75,41 @@
                     Elle est compatible avec le système Capgo et permet de distribuer des mises à jour sans passer par
                     les stores.
                 </p>
-                <div
-                    class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5 hover:bg-white/20 transition-all duration-300">
-                    <p class="text-sm font-semibold mb-2 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        URL de base de l'API
-                    </p>
-                    <code
-                        class="bg-black/30 px-4 py-2 rounded-lg text-sm font-mono block break-all">{{ $baseUrl }}</code>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div
+                        class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5 hover:bg-white/20 transition-all duration-300">
+                        <p class="text-sm font-semibold mb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            URL de base de l'API
+                        </p>
+                        <code
+                            class="bg-black/30 px-4 py-2 rounded-lg text-sm font-mono block break-all">{{ $baseUrl }}</code>
+                    </div>
+
+                    <div
+                        class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5 hover:bg-white/20 transition-all duration-300">
+                        <p class="text-sm font-semibold mb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Token API actif
+                        </p>
+                        @if($apiToken)
+                            <code
+                                class="bg-black/30 px-4 py-2 rounded-lg text-sm font-mono block break-all">{{ $apiToken }}</code>
+                        @else
+                            <p class="text-yellow-300 text-sm">
+                                Aucun token actif. Générez-en un avec :<br>
+                                <code class="bg-black/30 px-2 py-1 rounded text-xs mt-1 inline-block">php artisan api-token:manage generate</code>
+                            </p>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -142,11 +165,12 @@ npx cap sync</code></pre>
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 // Configuration
+const API_TOKEN = '{{ $apiToken ?? "VOTRE_TOKEN_ICI" }}'; // Remplacez par votre token
 CapacitorUpdater.notifyAppReady()
 
 async function checkAndUpdate() {
   try {
-    const response = await fetch('{{ $baseUrl }}/lastversion?identifier=com.example.app')
+    const response = await fetch('{{ $baseUrl }}/lastversion?identifier=com.example.app&api_token=' + API_TOKEN)
     const data = await response.json()
 
     if (data.version && data.url) {
@@ -311,7 +335,7 @@ export default config</code></pre>
                                     onclick="copyCode(this)">
                                     Copier
                                 </button>
-                                <pre><code class="language-{{ $type === 'curl' ? 'bash' : $type }}">{!! str_replace('{{ url }}', url(''), e($request)) !!}</code></pre>
+                                <pre><code class="language-{{ $type === 'curl' ? 'bash' : $type }}">{!! str_replace(['{{url}}', '{{token}}'], [url(''), $apiToken ?? 'VOTRE_TOKEN_ICI'], e($request)) !!}</code></pre>
                             </div>
                         </div>
                     @endforeach
@@ -363,6 +387,77 @@ export default config</code></pre>
                 </div>
             </div>
         @endforeach
+
+        {{-- Authentication Section --}}
+        <div
+            class="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-2xl shadow-xl p-8 border-2 border-yellow-200 dark:border-yellow-700 animate-fade-in-up">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-gradient-to-br from-yellow-400 to-orange-600 p-3 rounded-xl">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    Authentification API
+                </h3>
+            </div>
+            <div class="space-y-4">
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Toutes les routes API sont protégées par un système de token d'authentification. Le token doit être fourni dans l'URL de chaque requête via le paramètre <code class="bg-yellow-100 dark:bg-yellow-900 px-2 py-1 rounded text-sm">api_token</code>.
+                </p>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-5 border border-yellow-200 dark:border-yellow-700">
+                    <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Important - Sécurité du token
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-yellow-600 font-bold">•</span>
+                            <span>Ne partagez jamais votre token API publiquement</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-yellow-600 font-bold">•</span>
+                            <span>Stockez le token de manière sécurisée dans vos variables d'environnement</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-yellow-600 font-bold">•</span>
+                            <span>Utilisez HTTPS en production pour protéger le token en transit</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-yellow-600 font-bold">•</span>
+                            <span>Régénérez régulièrement votre token pour plus de sécurité</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-5 border border-yellow-200 dark:border-yellow-700">
+                    <h4 class="font-bold text-gray-900 dark:text-gray-100 mb-3">Gestion du token</h4>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-700 dark:text-gray-300">Commandes Artisan disponibles :</p>
+                        <div class="bg-gray-900 rounded-lg p-3 overflow-x-auto">
+                            <pre class="text-green-400 text-xs"><code># Afficher le token actif
+php artisan api-token:manage show
+
+# Générer un nouveau token
+php artisan api-token:manage generate
+
+# Lister tous les tokens
+php artisan api-token:manage list
+
+# Révoquer le token actif
+php artisan api-token:manage revoke</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {{-- Best Practices --}}
         <div
@@ -530,4 +625,37 @@ zip -r ./dist #Chemin des fichiers de build de capacitor
             </div>
         </div>
     </div>
+
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('code');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copié !';
+                button.classList.add('bg-green-600');
+                button.classList.remove('bg-gray-700');
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-600');
+                    button.classList.add('bg-gray-700');
+                }, 2000);
+            }).catch(err => {
+                console.error('Erreur lors de la copie:', err);
+                button.textContent = 'Erreur';
+                setTimeout(() => {
+                    button.textContent = 'Copier';
+                }, 2000);
+            });
+        }
+
+        // Initialiser highlight.js après le chargement du DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
 </x-filament-panels::page>

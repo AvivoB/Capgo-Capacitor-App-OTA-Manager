@@ -16,7 +16,11 @@ class AppsTable
         return $table
             ->columns([
                 TextColumn::make('name')->searchable(),
-                ImageColumn::make('appicon')
+                TextColumn::make('identifier')
+                        ->searchable()
+                        ->copyable()
+                        ->copyMessage('Copié !')
+                        ->copyMessageDuration(1500),
             ])
             ->filters([
                 //
