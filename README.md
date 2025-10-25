@@ -677,7 +677,7 @@ Contributions are welcome! Here's how to contribute:
 
 ## 👥 Authors
 
-- **Your Name** - *Lead Developer* - [@your-username](https://github.com/your-username)
+- **AvivoB** - *Lead Developer* - [@AvivoB](https://agence-devivo.fr)
 
 ---
 
@@ -700,7 +700,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For any questions or issues:
 
-- 📧 Email: support@example.com
+- 📧 Email: contact.devivo@gmail.com
 - 🐛 Issues: [GitHub Issues](https://github.com/your-username/Laravel-Mobile-App-OTA-Manager/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/your-username/Laravel-Mobile-App-OTA-Manager/discussions)
 
