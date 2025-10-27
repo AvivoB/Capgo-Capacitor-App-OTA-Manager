@@ -8,8 +8,6 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "${DB_PORT_EXTERNAL}:3306"
     volumes:
       - ./capacitor_ota/docker-app-data/mysql_data:/var/lib/mysql
 
@@ -18,8 +16,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    ports:
-      - "${API_PORT_EXTERNAL}:80"
     env_file:
       - .env
     depends_on:
@@ -32,8 +28,6 @@ services:
       PMA_HOST: ${DB_HOST}
       PMA_PORT: ${DB_PORT}
       PMA_AUTH_TYPE: cookie
-    ports:
-      - "${PHPMYADMIN_PORT_EXTERNAL}:80"
     depends_on:
       - mysql
 
