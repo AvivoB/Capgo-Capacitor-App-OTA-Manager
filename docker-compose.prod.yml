@@ -2,7 +2,6 @@ services:
 
   mysql:
     image: mysql:8.0
-    container_name: mobile_app_manager_mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -12,7 +11,6 @@ services:
       - ../files/capacitor_ota/docker-app-data/mysql_data:/var/lib/mysql
 
   api:
-    container_name: mobile_app_manager_laravel
     build:
       context: .
       dockerfile: Dockerfile.prod
@@ -23,7 +21,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: mobile_app_manager_phpmyadmin
     environment:
       PMA_HOST: ${DB_HOST}
       PMA_PORT: ${DB_PORT}
