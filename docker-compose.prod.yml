@@ -9,7 +9,7 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./capacitor_ota/docker-app-data/mysql_data:/var/lib/mysql
+      - ../files/capacitor_ota/docker-app-data/mysql_data:/var/lib/mysql
 
   api:
     container_name: mobile_app_manager_laravel
