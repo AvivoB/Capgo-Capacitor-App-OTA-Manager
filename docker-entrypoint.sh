@@ -3,12 +3,12 @@ set -e
 
 echo "🚀 Démarrage de l'application..."
 
-# Attendre que MySQL soit prêt
-echo "⏳ Attente de la disponibilité de MySQL..."
-until php artisan db:show 2>/dev/null; do
-    echo "   MySQL n'est pas encore prêt - attente..."
-    sleep 2
-done
+# # Attendre que MySQL soit prêt
+# echo "⏳ Attente de la disponibilité de MySQL..."
+# until php artisan db:show 2>/dev/null; do
+#     echo "   MySQL n'est pas encore prêt - attente..."
+#     sleep 2
+# done
 
 echo "✅ MySQL est prêt!"
 
