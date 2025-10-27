@@ -16,6 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'api.token' => \App\Http\Middleware\ValidateApiToken::class,
         ]);
+
+        // Vérifie si l'application est installée
+        $middleware->web(append: [
+            \App\Http\Middleware\CheckInstallation::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -1,16 +1,4 @@
 services:
-  api:
-    container_name: mobile_app_manager_laravel
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "${API_PORT_EXTERNAL}:80"
-    env_file:
-      - .env
-    volumes:
-      - .:/var/www/html
-      - ./docker-app-data/php_logs:/var/log/php
 
   mysql:
     image: mysql:8.0
@@ -23,7 +11,19 @@ services:
     ports:
       - "${DB_PORT_EXTERNAL}:3306"
     volumes:
-      - ./docker-app-data/mysql_data:/var/lib/mysql
+      - ./capacitor_ota/docker-app-data/mysql_data:/var/lib/mysql
+
+  api:
+    container_name: mobile_app_manager_laravel
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "${API_PORT_EXTERNAL}:80"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -36,3 +36,6 @@ services:
       - "${PHPMYADMIN_PORT_EXTERNAL}:80"
     depends_on:
       - mysql
+
+volumes:
+  capacitor_ota:

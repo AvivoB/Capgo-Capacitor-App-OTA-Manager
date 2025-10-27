@@ -10,7 +10,9 @@ services:
       - .env
     volumes:
       - .:/var/www/html
-      - capacitor_ota/docker-app-data/php_logs:/var/log/php
+      - ./docker-app-data/php_logs:/var/log/php
+    depends_on:
+      - mysql
 
   mysql:
     image: mysql:8.0
@@ -23,7 +25,7 @@ services:
     ports:
       - "${DB_PORT_EXTERNAL}:3306"
     volumes:
-      - capacitor_ota/docker-app-data/mysql_data:/var/lib/mysql
+      - ./docker-app-data/mysql_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -36,5 +38,3 @@ services:
       - "${PHPMYADMIN_PORT_EXTERNAL}:80"
     depends_on:
       - mysql
-volumes:
-  - capacitor_ota

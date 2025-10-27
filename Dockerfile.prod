@@ -2,9 +2,11 @@ FROM php:8.4-apache
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Installation des extensions
 RUN apt-get update && apt-get install -y \
     nodejs \
     npm \
+    libicu-dev \
     libzip-dev \
     libpng-dev \
     libjpeg-dev \
@@ -14,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd zip pdo pdo_mysql xml
+    && docker-php-ext-install -j$(nproc) gd zip pdo pdo_mysql xml intl 
 
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
 
@@ -38,5 +40,10 @@ COPY . /var/www/html
 # On lance composer
 WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader
-RUN php artisan migrate
-RUN php artisan storage:link
+
+# Copier le script d'entrée
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]

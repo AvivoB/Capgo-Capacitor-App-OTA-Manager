@@ -74,6 +74,9 @@
 
 ### App Manager OTA
 
+#### Onboarding
+![Create Account Manager](/public/img/Onboarding.png)
+*Go to /onboarding and create your manager account*
 
 #### Applications List
 ![Applications List](/public/img/AppList.png)
@@ -172,11 +175,17 @@ php artisan db:seed --class=ApiTokenSeeder
 
 > ⚠️ **Important**: Save the displayed token, it will not be shown again!
 
-#### 7. Create an admin user
+#### 7. First Time Setup (Onboarding)
 
-```bash
-php artisan make:filament-user
-```
+When you first access the application, you'll be automatically redirected to the onboarding page at `/onboarding`. This page is only accessible during the initial installation and will allow you to:
+
+- Create the administrator account
+- Set up your admin credentials
+- Access the admin panel
+
+Simply visit `http://localhost:8000` and you'll be guided through the setup process.
+
+> 📌 **Note**: The onboarding page is automatically disabled after creating the first admin user and will redirect to the login page on subsequent visits.
 
 #### 8. Compile assets
 
@@ -194,7 +203,7 @@ The application will be accessible at `http://localhost:8000`
 
 ---
 
-### Option 2: Docker Installation
+### Option 2: Docker Installation (Production)
 
 #### 1. Clone the project
 
@@ -203,46 +212,67 @@ git clone https://github.com/your-username/Laravel-Mobile-App-OTA-Manager.git
 cd Laravel-Mobile-App-OTA-Manager
 ```
 
-#### 2. Start containers
+#### 2. Configure environment
 
 ```bash
-# Development
-docker-compose up -d
-
-# Production
-docker-compose -f docker-compose.prod.yml up -d
+cp .env.example .env
+# Edit .env with your production settings
 ```
 
-#### 3. Install dependencies in the container
+Important environment variables for Docker:
+```env
+DB_HOST=mobile_app_manager_mysql
+DB_DATABASE=appmanagerotacapacitor
+DB_USERNAME=appmanagerotacapacitor
+DB_PASSWORD=your_secure_password
+
+API_PORT_EXTERNAL=8080
+DB_PORT_EXTERNAL=3307
+PHPMYADMIN_PORT_EXTERNAL=8081
+```
+
+#### 3. Start containers
 
 ```bash
-docker-compose exec app composer install
-docker-compose exec app npm install
-docker-compose exec app npm run build
+docker-compose -f docker-compose.prod.yaml up -d --build
 ```
 
-#### 4. Configuration
+The Docker setup will automatically:
+- Wait for MySQL to be ready
+- Run database migrations
+- Create storage links
+- Optimize the application
+- Set proper permissions
+
+#### 4. First Time Setup (Onboarding)
+
+Once the containers are running:
+
+1. Visit `http://localhost:8080` (or your configured port)
+2. You'll be automatically redirected to the onboarding page
+3. Create your administrator account by filling in:
+   - Full name
+   - Email address
+   - Password (minimum 8 characters)
+4. Click "Create administrator account"
+5. You'll be automatically logged in and redirected to the admin panel
+
+> 📌 **Note**: The onboarding page is only accessible once. After creating the admin account, it will redirect to the login page.
+
+#### 5. Generate API token
 
 ```bash
-docker-compose exec app cp .env.example .env
-docker-compose exec app php artisan key:generate
+docker-compose exec api php artisan db:seed --class=ApiTokenSeeder
 ```
 
-#### 5. Migrations and token
+> ⚠️ **Important**: Save the displayed token, it will not be shown again!
 
-```bash
-docker-compose exec app php artisan migrate
-docker-compose exec app php artisan storage:link
-docker-compose exec app php artisan db:seed --class=ApiTokenSeeder
-```
+#### Access Points
 
-#### 6. Create an admin user
-
-```bash
-docker-compose exec app php artisan make:filament-user
-```
-
-The application will be accessible at `http://localhost:8000`
+- **Application**: `http://localhost:8080`
+- **Admin Panel**: `http://localhost:8080/admin`
+- **PhpMyAdmin**: `http://localhost:8081`
+- **API**: `http://localhost:8080/api/ota`
 
 ---
 
