@@ -14,7 +14,7 @@ class AppForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label('Nom de l\'application')
+                    ->label(__('filament.fields.name'))
                     ->required()
                     ->maxLength(255)
                     ->reactive() // ← très important
@@ -24,7 +24,7 @@ class AppForm
                     }),
 
                 TextInput::make('identifier')
-                    ->label('Code identifiant l\'application')
+                    ->label(__('filament.fields.identifier'))
                     ->required()
                     ->maxLength(255),
             ]);

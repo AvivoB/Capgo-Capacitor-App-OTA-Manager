@@ -17,51 +17,51 @@ class VersionForm
     {
         return $schema
             ->components([
-                Section::make('Informations de la version')
-                    ->description('Configurez les détails de la version OTA')
+                Section::make(__('filament.sections.version_info.title'))
+                    ->description(__('filament.sections.version_info.description'))
                     ->schema([
                         Select::make('app_id')
-                            ->label('Application')
+                            ->label(__('filament.fields.app_id'))
                             ->options(App::query()->pluck('name', 'id'))
                             ->native(false)
                             ->searchable()
                             ->required()
-                            ->helperText('Sélectionnez l\'application pour laquelle cette version est destinée'),
+                            ->helperText(__('filament.helpers.select_app')),
 
                         TextInput::make('code')
-                            ->label('Code de version')
+                            ->label(__('filament.fields.code'))
                             ->required()
-                            ->placeholder('1.0.0')
-                            ->helperText('Format recommandé: X.Y.Z (ex: 1.2.0)')
+                            ->placeholder(__('filament.placeholders.version_code'))
+                            ->helperText(__('filament.helpers.version_format'))
                             ->maxLength(50),
                     ]),
 
-                Section::make('Bundle OTA')
-                    ->description('Upload le fichier ZIP contenant la mise à jour')
+                Section::make(__('filament.sections.ota_bundle.title'))
+                    ->description(__('filament.sections.ota_bundle.description'))
                     ->schema([
                         FileUpload::make('path')
-                            ->label('Bundle ZIP')
+                            ->label(__('filament.fields.path'))
                             ->acceptedFileTypes(['application/zip', 'application/x-zip-compressed'])
                             ->directory('bundles')
                             ->disk('public')
                             ->required()
-                            ->helperText('Uploadez le fichier ZIP contenant les fichiers de l\'application (dossier www/)'),
+                            ->helperText(__('filament.helpers.upload_bundle')),
                     ]),
 
-                Section::make('Changelog')
-                    ->description('Ajoutez les notes de version')
+                Section::make(__('filament.sections.changelog.title'))
+                    ->description(__('filament.sections.changelog.description'))
                     ->schema([
                         Repeater::make('changelog')
-                            ->label('Changelog')
+                            ->label(__('filament.fields.changelog'))
                             ->schema([
                                 TextInput::make('note')
-                                    ->label('Note')
+                                    ->label(__('filament.fields.note'))
                                     ->required()
-                                    ->placeholder('Ex: Correction du bug de connexion'),
+                                    ->placeholder(__('filament.placeholders.changelog_note')),
                             ])
-                            ->addActionLabel('Ajouter une note')
+                            ->addActionLabel(__('filament.buttons.add_note'))
                             ->defaultItems(1)
-                            ->helperText('Listez les modifications apportées dans cette version'),
+                            ->helperText(__('filament.helpers.changelog_list')),
                     ]),
             ]);
     }

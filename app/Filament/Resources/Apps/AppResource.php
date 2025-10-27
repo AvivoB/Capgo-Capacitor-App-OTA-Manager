@@ -23,9 +23,27 @@ class AppResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static UnitEnum|string|null $navigationGroup = 'OTA Management';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('filament.resources.app.plural_label');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('filament.resources.app.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('filament.resources.app.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament.resources.app.navigation_group');
+    }
 
     public static function form(Schema $schema): Schema
     {

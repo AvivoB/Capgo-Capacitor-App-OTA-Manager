@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Initial Setup - {{ config('app.name') }}</title>
+    <title>{{ __('onboarding.title') }} - {{ config('app.name') }}</title>
     @filamentStyles
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-50 dark:bg-gray-950">
     <div class="min-h-screen flex items-center justify-center p-4">
+        <!-- Language Switcher -->
+        <div class="fixed top-4 right-4 z-50">
+            <div class="flex gap-2 bg-white dark:bg-gray-900 rounded-lg shadow-lg ring-1 ring-gray-950/5 dark:ring-white/10 p-1">
+                <a href="{{ route('language.switch', 'en') }}"
+                   class="px-3 py-1.5 text-sm font-medium rounded-md transition-colors {{ app()->getLocale() === 'en' ? 'bg-primary-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800' }}">
+                    EN
+                </a>
+                <a href="{{ route('language.switch', 'fr') }}"
+                   class="px-3 py-1.5 text-sm font-medium rounded-md transition-colors {{ app()->getLocale() === 'fr' ? 'bg-primary-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800' }}">
+                    FR
+                </a>
+            </div>
+        </div>
+
         <div class="w-full max-w-md">
             <!-- Main Card -->
             <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg ring-1 ring-gray-950/5 dark:ring-white/10">
@@ -21,8 +35,8 @@
                             </svg>
                         </div>
                     </div>
-                    <h1 class="text-2xl font-bold text-gray-950 dark:text-white">Welcome!</h1>
-                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Set up your administrator account</p>
+                    <h1 class="text-2xl font-bold text-gray-950 dark:text-white">{{ __('onboarding.welcome') }}</h1>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ __('onboarding.subtitle') }}</p>
                 </div>
 
                 <!-- Form -->
@@ -36,7 +50,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-sm font-semibold text-danger-800 dark:text-danger-400">Validation errors</h3>
+                                    <h3 class="text-sm font-semibold text-danger-800 dark:text-danger-400">{{ __('onboarding.errors.validation_title') }}</h3>
                                     <ul class="mt-2 text-sm text-danger-700 dark:text-danger-400 space-y-1">
                                         @foreach ($errors->all() as $error)
                                             <li class="flex items-start gap-2">
@@ -56,7 +70,7 @@
                         <!-- Name -->
                         <div>
                             <label for="name" class="text-sm font-medium text-gray-950 dark:text-white">
-                                Full name
+                                {{ __('onboarding.form.name') }}
                             </label>
                             <input
                                 type="text"
@@ -66,7 +80,7 @@
                                 required
                                 autofocus
                                 class="mt-2 block w-full rounded-lg border-0 bg-white dark:bg-white/5 px-3 py-2 text-gray-950 dark:text-white shadow-sm ring-1 ring-inset ring-gray-950/10 dark:ring-white/10 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-primary-600 dark:focus:ring-primary-500 @error('name') ring-danger-600 dark:ring-danger-500 @enderror"
-                                placeholder="John Doe"
+                                placeholder="{{ __('onboarding.form.name_placeholder') }}"
                             >
                             @error('name')
                                 <p class="mt-2 text-sm text-danger-600 dark:text-danger-400">{{ $message }}</p>
@@ -76,7 +90,7 @@
                         <!-- Email -->
                         <div>
                             <label for="email" class="text-sm font-medium text-gray-950 dark:text-white">
-                                Email address
+                                {{ __('onboarding.form.email') }}
                             </label>
                             <input
                                 type="email"
@@ -85,7 +99,7 @@
                                 value="{{ old('email') }}"
                                 required
                                 class="mt-2 block w-full rounded-lg border-0 bg-white dark:bg-white/5 px-3 py-2 text-gray-950 dark:text-white shadow-sm ring-1 ring-inset ring-gray-950/10 dark:ring-white/10 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-primary-600 dark:focus:ring-primary-500 @error('email') ring-danger-600 dark:ring-danger-500 @enderror"
-                                placeholder="admin@example.com"
+                                placeholder="{{ __('onboarding.form.email_placeholder') }}"
                             >
                             @error('email')
                                 <p class="mt-2 text-sm text-danger-600 dark:text-danger-400">{{ $message }}</p>
@@ -95,7 +109,7 @@
                         <!-- Password -->
                         <div>
                             <label for="password" class="text-sm font-medium text-gray-950 dark:text-white">
-                                Password
+                                {{ __('onboarding.form.password') }}
                             </label>
                             <input
                                 type="password"
@@ -103,9 +117,9 @@
                                 id="password"
                                 required
                                 class="mt-2 block w-full rounded-lg border-0 bg-white dark:bg-white/5 px-3 py-2 text-gray-950 dark:text-white shadow-sm ring-1 ring-inset ring-gray-950/10 dark:ring-white/10 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-primary-600 dark:focus:ring-primary-500 @error('password') ring-danger-600 dark:ring-danger-500 @enderror"
-                                placeholder="••••••••"
+                                placeholder="{{ __('onboarding.form.password_placeholder') }}"
                             >
-                            <p class="mt-2 text-xs text-gray-600 dark:text-gray-400">Minimum 8 characters</p>
+                            <p class="mt-2 text-xs text-gray-600 dark:text-gray-400">{{ __('onboarding.form.password_hint') }}</p>
                             @error('password')
                                 <p class="mt-2 text-sm text-danger-600 dark:text-danger-400">{{ $message }}</p>
                             @enderror
@@ -114,7 +128,7 @@
                         <!-- Password Confirmation -->
                         <div>
                             <label for="password_confirmation" class="text-sm font-medium text-gray-950 dark:text-white">
-                                Confirm password
+                                {{ __('onboarding.form.password_confirmation') }}
                             </label>
                             <input
                                 type="password"
@@ -122,7 +136,7 @@
                                 id="password_confirmation"
                                 required
                                 class="mt-2 block w-full rounded-lg border-0 bg-white dark:bg-white/5 px-3 py-2 text-gray-950 dark:text-white shadow-sm ring-1 ring-inset ring-gray-950/10 dark:ring-white/10 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-primary-600 dark:focus:ring-primary-500"
-                                placeholder="••••••••"
+                                placeholder="{{ __('onboarding.form.password_placeholder') }}"
                             >
                         </div>
 
@@ -131,7 +145,7 @@
                             type="submit"
                             class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 dark:bg-primary-500 dark:hover:bg-primary-400 dark:ring-offset-gray-900 transition-colors"
                         >
-                            Create administrator account
+                            {{ __('onboarding.form.submit') }}
                         </button>
                     </form>
                 </div>
@@ -139,7 +153,7 @@
                 <!-- Footer -->
                 <div class="bg-gray-50 dark:bg-white/5 px-8 py-4 border-t border-gray-200 dark:border-gray-800 rounded-b-xl">
                     <p class="text-xs text-center text-gray-600 dark:text-gray-400">
-                        This page will only be accessible once during installation.
+                        {{ __('onboarding.info.footer') }}
                     </p>
                 </div>
             </div>
@@ -153,9 +167,9 @@
                         </svg>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-sm font-semibold text-primary-800 dark:text-primary-400">First installation</h3>
+                        <h3 class="text-sm font-semibold text-primary-800 dark:text-primary-400">{{ __('onboarding.info.title') }}</h3>
                         <p class="mt-1 text-sm text-primary-700 dark:text-primary-400">
-                            This account will allow you to access the administration panel of your mobile app OTA manager.
+                            {{ __('onboarding.info.description') }}
                         </p>
                     </div>
                 </div>

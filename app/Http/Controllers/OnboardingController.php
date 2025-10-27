@@ -31,7 +31,7 @@ class OnboardingController extends Controller
     {
         // Verify that the application is not already installed
         if (Setting::isInstalled()) {
-            return redirect('/admin/login')->with('error', 'The application is already installed.');
+            return redirect('/admin/login')->with('error', __('onboarding.errors.already_installed'));
         }
 
         // Validate the data
@@ -54,6 +54,6 @@ class OnboardingController extends Controller
         // Automatically log in the user
         Auth::login($user);
 
-        return redirect('/admin/login')->with('success', 'Administrator account created successfully!');
+        return redirect('/admin/login')->with('success', __('onboarding.success'));
     }
 }

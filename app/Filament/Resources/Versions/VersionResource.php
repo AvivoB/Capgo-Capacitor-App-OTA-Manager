@@ -23,9 +23,27 @@ class VersionResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'code';
 
-    protected static UnitEnum|string|null $navigationGroup = 'OTA Management';
-
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('filament.resources.version.plural_label');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('filament.resources.version.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('filament.resources.version.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament.resources.version.navigation_group');
+    }
 
     public static function form(Schema $schema): Schema
     {

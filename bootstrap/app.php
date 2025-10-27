@@ -17,8 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'api.token' => \App\Http\Middleware\ValidateApiToken::class,
         ]);
 
-        // Vérifie si l'application est installée
+        // Vérifie si l'application est installée et définit la locale
         $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\CheckInstallation::class,
         ]);
     })

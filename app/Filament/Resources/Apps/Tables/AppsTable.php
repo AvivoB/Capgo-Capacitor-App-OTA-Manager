@@ -15,12 +15,15 @@ class AppsTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable(),
+                TextColumn::make('name')
+                    ->label(__('filament.fields.name'))
+                    ->searchable(),
                 TextColumn::make('identifier')
-                        ->searchable()
-                        ->copyable()
-                        ->copyMessage('Copié !')
-                        ->copyMessageDuration(1500),
+                    ->label(__('filament.fields.identifier'))
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Copié !')
+                    ->copyMessageDuration(1500),
             ])
             ->filters([
                 //

@@ -67,13 +67,11 @@
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
                     </svg>
                     <h2 class="tw-text-3xl tw-font-extrabold">
-                        API OTA pour Capacitor avec Capgo
+                        {{ $translations['title'] }}
                     </h2>
                 </div>
                 <p class="text-blue-50 mb-6 text-lg leading-relaxed">
-                    Cette API permet de gérer les mises à jour Over-The-Air (OTA) pour vos applications Capacitor.
-                    Elle est compatible avec le système Capgo et permet de distribuer des mises à jour sans passer par
-                    les stores.
+                    {{ $translations['subtitle'] }}
                 </p>
                 <div class="grid md:grid-cols-2 gap-4">
                     <div
@@ -84,7 +82,7 @@
                                     d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
                                     clip-rule="evenodd" />
                             </svg>
-                            URL de base de l'API
+                            {{ $translations['base_url'] }}
                         </p>
                         <code
                             class="bg-black/30 px-4 py-2 rounded-lg text-sm font-mono block break-all">{{ $baseUrl }}</code>
@@ -98,14 +96,14 @@
                                     d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z"
                                     clip-rule="evenodd" />
                             </svg>
-                            Token API actif
+                            {{ $translations['active_token'] }}
                         </p>
                         @if($apiToken)
                             <code
                                 class="bg-black/30 px-4 py-2 rounded-lg text-sm font-mono block break-all">{{ $apiToken }}</code>
                         @else
                             <p class="text-yellow-300 text-sm">
-                                Aucun token actif. Générez-en un avec :<br>
+                                {{ $translations['no_token'] }}<br>
                                 <code class="bg-black/30 px-2 py-1 rounded text-xs mt-1 inline-block">php artisan api-token:manage generate</code>
                             </p>
                         @endif
@@ -126,7 +124,8 @@
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    Configuration de Capacitor
+                    {{__('documentation.capacitor_config.title')}}
+                    
                 </h3>
             </div>
 
@@ -135,13 +134,13 @@
                     <div class="flex items-center gap-2 mb-3">
                         <span
                             class="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold text-sm">1</span>
-                        <h4 class="font-bold text-gray-900 dark:text-gray-100 text-lg">Installation de Capgo</h4>
+                        <h4 class="font-bold text-gray-900 dark:text-gray-100 text-lg">{{__('documentation.capacitor_config.step1.title')}}</h4>
                     </div>
                     <div class="code-block relative">
                         <button
                             class="copy-button bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-all"
                             onclick="copyCode(this)">
-                            Copier
+                            {{ $translations['copy'] }}
                         </button>
                         <pre><code class="language-bash">npm install @capgo/capacitor-updater
 npx cap sync</code></pre>
@@ -152,14 +151,13 @@ npx cap sync</code></pre>
                     <div class="flex items-center gap-2 mb-3">
                         <span
                             class="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 text-white font-bold text-sm">2</span>
-                        <h4 class="font-bold text-gray-900 dark:text-gray-100 text-lg">Configuration dans votre
-                            application</h4>
+                        <h4 class="font-bold text-gray-900 dark:text-gray-100 text-lg">{{__('documentation.capacitor_config.step2.title')}}</h4>
                     </div>
                     <div class="code-block relative">
                         <button
                             class="copy-button bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-all"
                             onclick="copyCode(this)">
-                            Copier
+                            {{ $translations['copy'] }}
                         </button>
                         <pre><code class="language-javascript">// main.tsx ou App.tsx
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -202,14 +200,13 @@ checkAndUpdate()</code></pre>
                     <div class="flex items-center gap-2 mb-3">
                         <span
                             class="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-orange-600 text-white font-bold text-sm">3</span>
-                        <h4 class="font-bold text-gray-900 dark:text-gray-100 text-lg">Configuration de
-                            capacitor.config.ts</h4>
+                        <h4 class="font-bold text-gray-900 dark:text-gray-100 text-lg">{{__('documentation.capacitor_config.step3.title')}}</h4>
                     </div>
                     <div class="code-block relative">
                         <button
                             class="copy-button bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-all"
                             onclick="copyCode(this)">
-                            Copier
+                            {{ $translations['copy'] }}
                         </button>
                         <pre><code class="language-typescript">import { CapacitorConfig } from '@capacitor/cli'
 
@@ -258,7 +255,7 @@ export default config</code></pre>
                                 d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
                                 clip-rule="evenodd" />
                         </svg>
-                        Endpoint
+                        {{ $translations['endpoint'] }}
                     </h4>
                     <div
                         class="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 rounded-xl p-4 border-l-4 border-blue-500">
@@ -277,7 +274,7 @@ export default config</code></pre>
                                     d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
                                     clip-rule="evenodd" />
                             </svg>
-                            Paramètres
+                            {{ $translations['parameters'] }}
                         </h4>
                         <div
                             class="bg-white dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700 overflow-x-auto">
@@ -285,9 +282,9 @@ export default config</code></pre>
                                 <thead>
                                     <tr class="border-b-2 border-gray-300 dark:border-gray-600">
                                         <th class="text-left py-3 px-2 text-gray-700 dark:text-gray-300 font-bold">
-                                            Paramètre</th>
+                                            {{ $translations['parameter'] }}</th>
                                         <th class="text-left py-3 px-2 text-gray-700 dark:text-gray-300 font-bold">
-                                            Description</th>
+                                            {{ $translations['description'] }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -318,7 +315,7 @@ export default config</code></pre>
                                 d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z"
                                 clip-rule="evenodd" />
                         </svg>
-                        Exemples de requêtes
+                        {{ $translations['request_examples'] }}
                     </h4>
 
                     @foreach ($example['request'] as $type => $request)
@@ -333,7 +330,7 @@ export default config</code></pre>
                                 <button
                                     class="copy-button bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-all"
                                     onclick="copyCode(this)">
-                                    Copier
+                                    {{ $translations['copy'] }}
                                 </button>
                                 <pre><code class="language-{{ $type === 'curl' ? 'bash' : $type }}">{!! str_replace(['{{url}}', '{{token}}'], [url(''), $apiToken ?? 'VOTRE_TOKEN_ICI'], e($request)) !!}</code></pre>
                             </div>
@@ -351,13 +348,13 @@ export default config</code></pre>
                                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                Réponse succès
+                                {{ $translations['success_response'] }}
                             </h4>
                             <div class="code-block relative">
                                 <button
                                     class="copy-button bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-all"
                                     onclick="copyCode(this)">
-                                    Copier
+                                    {{ $translations['copy'] }}
                                 </button>
                                 <pre><code class="language-json">{{ is_array($example['response_success']) ? json_encode($example['response_success'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) : $example['response_success'] }}</code></pre>
                             </div>
@@ -372,13 +369,13 @@ export default config</code></pre>
                                         d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                Réponse erreur
+                                {{ $translations['error_response'] }}
                             </h4>
                             <div class="code-block relative">
                                 <button
                                     class="copy-button bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-all"
                                     onclick="copyCode(this)">
-                                    Copier
+                                    {{ $translations['copy'] }}
                                 </button>
                                 <pre><code class="language-json">{{ is_array($example['response_error']) ? json_encode($example['response_error'], JSON_PRETTY_PRINT) : $example['response_error'] }}</code></pre>
                             </div>
@@ -633,7 +630,7 @@ zip -r ./dist #Chemin des fichiers de build de capacitor
 
             navigator.clipboard.writeText(text).then(() => {
                 const originalText = button.textContent;
-                button.textContent = 'Copié !';
+                button.textContent = '{{ $translations["copied"] }}';
                 button.classList.add('bg-green-600');
                 button.classList.remove('bg-gray-700');
 
@@ -643,10 +640,10 @@ zip -r ./dist #Chemin des fichiers de build de capacitor
                     button.classList.add('bg-gray-700');
                 }, 2000);
             }).catch(err => {
-                console.error('Erreur lors de la copie:', err);
-                button.textContent = 'Erreur';
+                console.error('{{ __("documentation.copy") }}:', err);
+                button.textContent = 'Error';
                 setTimeout(() => {
-                    button.textContent = 'Copier';
+                    button.textContent = '{{ $translations["copy"] }}';
                 }, 2000);
             });
         }

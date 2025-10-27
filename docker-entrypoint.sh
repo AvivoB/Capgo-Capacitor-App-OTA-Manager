@@ -26,6 +26,9 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
+# Générer une clé API
+php artisan api-token:manage generate
+
 # Définir les permissions appropriées
 echo "🔐 Configuration des permissions..."
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache

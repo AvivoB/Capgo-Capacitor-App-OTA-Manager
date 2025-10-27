@@ -29,6 +29,8 @@ class AppmanagerPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            // ->locales(['en', 'fr'])
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Appmanager/Resources'), for: 'App\Filament\Appmanager\Resources')
             ->discoverPages(in: app_path('Filament/Appmanager/Pages'), for: 'App\Filament\Appmanager\Pages')
             ->pages([

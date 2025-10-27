@@ -21,10 +21,10 @@ class VersionsTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('code')
-                    ->label('Code de version')
+                    ->label(__('filament.fields.version_number'))
                     ->searchable(),
                 TextColumn::make('path')
-                    ->label('Chemin du Bundle')
+                    ->label(__('filament.fields.file_url'))
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

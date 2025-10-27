@@ -10,13 +10,22 @@ class OtaDocumentation extends Page
 {
   protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
-  protected static ?string $navigationLabel = 'Documentation API OTA';
-
-  protected static ?string $title = 'Documentation API OTA';
-
-  protected static UnitEnum|string|null $navigationGroup = 'OTA Management';
-
   protected static ?int $navigationSort = 3;
+
+  public static function getNavigationLabel(): string
+  {
+      return __('filament.navigation.documentation');
+  }
+
+  public function getTitle(): string
+  {
+      return __('filament.navigation.documentation');
+  }
+
+  public static function getNavigationGroup(): ?string
+  {
+      return __('filament.resources.app.navigation_group');
+  }
 
   protected string $view = 'filament.pages.ota-documentation';
 
@@ -27,6 +36,22 @@ class OtaDocumentation extends Page
       'baseUrl' => url('/api/ota'),
       'apiToken' => $this->getActiveToken(),
       'examples' => $this->getExamples(),
+      'translations' => [
+        'title' => __('documentation.title'),
+        'subtitle' => __('documentation.subtitle'),
+        'base_url' => __('documentation.base_url'),
+        'active_token' => __('documentation.active_token'),
+        'no_token' => __('documentation.no_token'),
+        'copy' => __('documentation.copy'),
+        'copied' => __('documentation.copied'),
+        'endpoint' => __('documentation.endpoint'),
+        'parameters' => __('documentation.parameters'),
+        'parameter' => __('documentation.parameter'),
+        'description' => __('documentation.description'),
+        'request_examples' => __('documentation.request_examples'),
+        'success_response' => __('documentation.success_response'),
+        'error_response' => __('documentation.error_response'),
+      ],
     ];
   }
 
@@ -40,14 +65,14 @@ class OtaDocumentation extends Page
   {
     return [
       'lastversion' => [
-        'title' => 'Récupérer la dernière version',
+        'title' => __('documentation.examples.lastversion.title'),
         'method' => 'GET',
         'endpoint' => '/api/ota/lastversion',
-        'description' => 'Récupère les informations de la dernière version disponible pour une application.',
+        'description' => __('documentation.examples.lastversion.description'),
         'parameters' => [
-          'identifier' => 'L\'identifiant unique de l\'application (requis)',
-          'current_version' => 'La version actuelle de l\'application (optionnel)',
-          'api_token' => 'Votre token d\'authentification API (requis)',
+          'identifier' => __('documentation.examples.lastversion.params.identifier'),
+          'current_version' => __('documentation.examples.lastversion.params.current_version'),
+          'api_token' => __('documentation.examples.lastversion.params.api_token'),
         ],
         'request' => [
           'curl' => 'curl -X GET "' . url('/api/ota/lastversion?identifier=com.example.app&current_version=1.0.0&api_token={{token}}') . '"',
@@ -94,14 +119,14 @@ JS,
         ],
       ],
       'check_update' => [
-        'title' => 'Vérifier si une mise à jour est disponible',
+        'title' => __('documentation.examples.check_update.title'),
         'method' => 'GET',
         'endpoint' => '/api/ota/check-update',
-        'description' => 'Compare la version actuelle avec la dernière version disponible.',
+        'description' => __('documentation.examples.check_update.description'),
         'parameters' => [
-          'identifier' => 'L\'identifiant unique de l\'application (requis)',
-          'current_version' => 'La version actuelle de l\'application (requis)',
-          'api_token' => 'Votre token d\'authentification API (requis)',
+          'identifier' => __('documentation.examples.check_update.params.identifier'),
+          'current_version' => __('documentation.examples.check_update.params.current_version'),
+          'api_token' => __('documentation.examples.check_update.params.api_token'),
         ],
         'request' => [
           'curl' => 'curl -X GET "' . url('/api/ota/check-update?identifier=com.example.app&current_version=1.0.0&api_token={{token}}') . '"',
@@ -129,14 +154,14 @@ JS,
         ],
       ],
       'download' => [
-        'title' => 'Télécharger une version spécifique',
+        'title' => __('documentation.examples.download.title'),
         'method' => 'GET',
         'endpoint' => '/api/ota/download/{identifier}/{version}',
-        'description' => 'Télécharge le bundle d\'une version spécifique.',
+        'description' => __('documentation.examples.download.description'),
         'parameters' => [
-          'identifier' => 'L\'identifiant unique de l\'application',
-          'version' => 'Le code de version à télécharger',
-          'api_token' => 'Votre token d\'authentification API (requis)',
+          'identifier' => __('documentation.examples.download.params.identifier'),
+          'version' => __('documentation.examples.download.params.version'),
+          'api_token' => __('documentation.examples.download.params.api_token'),
         ],
         'request' => [
           'curl' => 'curl -X GET "' . url('/api/ota/download/com.example.app/1.2.0?api_token={{token}}') . '" -o update.zip',
@@ -164,15 +189,15 @@ JS,
         ],
       ],
       'upload' => [
-        'title' => 'Upload une nouvelle version (Admin)',
+        'title' => __('documentation.examples.upload.title'),
         'method' => 'POST',
         'endpoint' => '/api/admin/ota/upload',
-        'description' => 'Upload un nouveau bundle de mise à jour (nécessite une authentification).',
+        'description' => __('documentation.examples.upload.description'),
         'parameters' => [
-          'identifier' => 'L\'identifiant de l\'application (requis)',
-          'version' => 'Le code de version (requis, ex: 1.2.0)',
-          'bundle' => 'Le fichier ZIP contenant la mise à jour (requis)',
-          'changelog' => 'Le changelog au format JSON array (optionnel)',
+          'identifier' => __('documentation.examples.upload.params.identifier'),
+          'version' => __('documentation.examples.upload.params.version'),
+          'bundle' => __('documentation.examples.upload.params.bundle'),
+          'changelog' => __('documentation.examples.upload.params.changelog'),
         ],
         'request' => [
           'curl' => <<<BASH
