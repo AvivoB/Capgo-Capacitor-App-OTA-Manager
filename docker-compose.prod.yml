@@ -30,6 +30,3 @@ services:
       PMA_AUTH_TYPE: cookie
     depends_on:
       - mysql
-
-volumes:
-  capacitor_ota:
