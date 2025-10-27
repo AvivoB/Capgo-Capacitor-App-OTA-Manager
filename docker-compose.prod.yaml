@@ -1,0 +1,40 @@
+services:
+  api:
+    container_name: mobile_app_manager_laravel
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "${API_PORT_EXTERNAL}:80"
+    env_file:
+      - .env
+    volumes:
+      - .:/var/www/html
+      - capacitor_ota/docker-app-data/php_logs:/var/log/php
+
+  mysql:
+    image: mysql:8.0
+    container_name: mobile_app_manager_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT_EXTERNAL}:3306"
+    volumes:
+      - capacitor_ota/docker-app-data/mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: mobile_app_manager_phpmyadmin
+    environment:
+      PMA_HOST: ${DB_HOST}
+      PMA_PORT: ${DB_PORT}
+      PMA_AUTH_TYPE: cookie
+    ports:
+      - "${PHPMYADMIN_PORT_EXTERNAL}:80"
+    depends_on:
+      - mysql
+volumes:
+  - capacitor_ota
