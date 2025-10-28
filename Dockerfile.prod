@@ -42,6 +42,8 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader
 
+# Installer dépendances front et build
+RUN npm install
 RUN npm run build
 
 # Copier le script d'entrée
