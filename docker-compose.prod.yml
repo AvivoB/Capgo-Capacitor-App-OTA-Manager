@@ -7,6 +7,8 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - app_network
     volumes:
       - ../files/capacitor_ota/docker-app-data/mysql_data:/var/lib/mysql
 
@@ -16,14 +18,11 @@ services:
       dockerfile: Dockerfile.prod
     env_file:
       - .env
+    networks:
+      - app_network
     depends_on:
       - mysql
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: ${DB_HOST}
-      PMA_PORT: ${DB_PORT}
-      PMA_AUTH_TYPE: cookie
-    depends_on:
-      - mysql
+networks:
+  app_network:
+    driver: bridge
