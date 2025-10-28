@@ -42,6 +42,8 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader
 
+RUN npm run build
+
 # Copier le script d'entrée
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
