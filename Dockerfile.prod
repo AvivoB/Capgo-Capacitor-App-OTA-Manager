@@ -6,6 +6,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN apt-get update && apt-get install -y \
     nodejs \
     npm \
+    default-mysql-client \
     libicu-dev \
     libzip-dev \
     libpng-dev \
@@ -45,5 +46,7 @@ RUN composer install --no-dev --optimize-autoloader
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+
+# Démarrage via entrypoint
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
